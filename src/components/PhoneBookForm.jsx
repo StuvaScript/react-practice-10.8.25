@@ -1,11 +1,38 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
-export default function PhoneBookForm() {
+export default function PhoneBookForm({
+  updatePhoneBook,
+  editContact,
+  editPhoneBook,
+}) {
   const [name, setName] = useState("");
-  const [phone, setPhone] = useState(null);
+  const [phone, setPhone] = useState("");
+  const [counter, setCounter] = useState(3);
+
+  useEffect(() => {
+    if (editContact.id) {
+      setName(editContact.name);
+      setPhone(editContact.phone);
+    } else {
+      setName("");
+      setPhone("");
+    }
+  }, [editContact]);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (editContact.id) {
+      editPhoneBook({ name, phone, id: editContact.id });
+    } else {
+      updatePhoneBook({ name, phone, id: counter });
+      setCounter((count) => count + 1);
+    }
+    setName("");
+    setPhone("");
+  };
 
   return (
-    <form>
+    <form onSubmit={handleSubmit}>
       <div>
         <label htmlFor="name">Name: </label>
         <input
@@ -27,7 +54,9 @@ export default function PhoneBookForm() {
         />
       </div>
       <div>
-        <button type="submit">Add person</button>
+        <button type="submit">
+          {editContact.id ? "Edit person" : "Add person"}
+        </button>
       </div>
     </form>
   );
