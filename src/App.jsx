@@ -1,6 +1,6 @@
 import Challenges from "./components/Challenges";
-import PhoneBook from "./components/PhoneBook";
-import ToDo from "./components/ToDo";
+import PhoneBook from "./components/phonebook/PhoneBook";
+import ToDo from "./components/todo/ToDo";
 
 function App() {
   return (
