@@ -26,15 +26,21 @@ export default function PhoneBook(): JSX.Element {
     setPhoneBook([...phoneBook, value]);
   };
 
-  const handleDelete = (id) => {
+  const handleDelete = (id: number): void => {
     setPhoneBook([...phoneBook.filter((entry) => entry.id !== id)]);
   };
 
-  const handleEdit = (id) => {
-    setEditContact(phoneBook.find((entry) => entry.id === id));
+  const handleEdit = (id: number): void => {
+    const editableContact: PhoneBook | undefined = phoneBook.find(
+      (entry) => entry.id === id
+    );
+    if (!editableContact)
+      throw new Error(`No contact exists with the ID of ${id}`);
+
+    setEditContact(editableContact);
   };
 
-  const editPhoneBook = (value) => {
+  const editPhoneBook = (value: PhoneBook): void => {
     setPhoneBook([
       ...phoneBook.filter((entry) => entry.id !== value.id),
       value,
