@@ -49,7 +49,7 @@ export default function PhoneBook(): JSX.Element {
   };
 
   const sortMethod = (a: PhoneBook, b: PhoneBook): number => {
-    const { field, direction } = sort;
+    const { field, direction }: Sort = sort;
 
     if (field === "name" && direction === "asc")
       return a.name.localeCompare(b.name);
@@ -64,12 +64,12 @@ export default function PhoneBook(): JSX.Element {
     return 0;
   };
 
-  const sortedPhoneBook = useMemo(() => {
+  const sortedPhoneBook = useMemo((): PhoneBook[] => {
     return phoneBook.toSorted(sortMethod);
   }, [phoneBook, sort]);
 
-  const handleSort = (value) => {
-    setSort((prev) => {
+  const handleSort = (value: Sort["field"]): void => {
+    setSort((prev: Sort): Sort => {
       if (prev.field === value) {
         return {
           field: value,
