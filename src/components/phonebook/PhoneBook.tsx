@@ -10,7 +10,7 @@ type PhoneBook = {
 };
 
 type Sort = {
-  field: "name";
+  field: "name" | "phone";
   direction: "asc" | "desc";
 };
 
@@ -48,7 +48,7 @@ export default function PhoneBook(): JSX.Element {
     setEditContact({});
   };
 
-  const sortMethod = (a, b) => {
+  const sortMethod = (a: PhoneBook, b: PhoneBook): number => {
     const { field, direction } = sort;
 
     if (field === "name" && direction === "asc")
