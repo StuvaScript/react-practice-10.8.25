@@ -1,7 +1,8 @@
-export default function Challenges() {
+import type { JSX } from "react";
+
+export default function Challenges(): JSX.Element {
   const string1 = "abcde";
   const string2 = "aabc";
-
   //   const problem1 = (string) => {
   //     const split = string.split("");
   //     let allUnique = true;
@@ -38,24 +39,27 @@ export default function Challenges() {
 
   const string5 = "You really outdid yourself this time!";
 
-  const countTheVowels = (string) => {
-    const noFirstYLetter = string
+  const countTheVowels = (string: string) => {
+    // ``** This removes any "y" letters from the beginning of a word
+    const noFirstYLetter: string = string
       .toLowerCase()
       .split(" ")
       .map((word) => (word[0] === "y" ? word.slice(1) : word))
       .join(" ");
 
-    const vowelArray = ["a", "e", "i", "o", "u", "y"];
+    const vowelArray: string[] = ["a", "e", "i", "o", "u", "y"];
 
-    const vowels = noFirstYLetter.split("").reduce((acc, current) => {
-      if (!vowelArray.includes(current)) return acc;
+    const vowels = noFirstYLetter
+      .split("")
+      .reduce((acc: Record<string, number>, current: string) => {
+        if (!vowelArray.includes(current)) return acc;
 
-      if (!acc[current]) {
-        acc[current] = 0;
-      }
-      acc[current]++;
-      return acc;
-    }, {});
+        if (!acc[current]) {
+          acc[current] = 0;
+        }
+        acc[current]++;
+        return acc;
+      }, {});
 
     return JSON.stringify(vowels);
   };
@@ -86,9 +90,8 @@ export default function Challenges() {
         firstNonRepeatingLetter:{" "}
         {firstNonRepeatingLetter(string3) || "No unique characters"}
       </div>
+      <div>countTheVowels: {countTheVowels(string5)}</div>
     </>
-    // ${firstNonRepeatingLetter(string3)},
-    // ${countTheVowels(string5)},
     // ${findPairs(numbersArray, target)}`,
   );
 }
