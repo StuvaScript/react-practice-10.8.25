@@ -39,7 +39,7 @@ export default function Challenges(): JSX.Element {
 
   const string5 = "You really outdid yourself this time!";
 
-  const countTheVowels = (string: string) => {
+  const countTheVowels = (string: string): string => {
     // ``** This removes any "y" letters from the beginning of a word
     const noFirstYLetter: string = string
       .toLowerCase()
@@ -49,7 +49,7 @@ export default function Challenges(): JSX.Element {
 
     const vowelArray: string[] = ["a", "e", "i", "o", "u", "y"];
 
-    const vowels = noFirstYLetter
+    const vowels: Record<string, number> = noFirstYLetter
       .split("")
       .reduce((acc: Record<string, number>, current: string) => {
         if (!vowelArray.includes(current)) return acc;
@@ -64,16 +64,21 @@ export default function Challenges(): JSX.Element {
     return JSON.stringify(vowels);
   };
 
-  const numbersArray = [1, 3, 2, 2, 4, 5, 7, 0];
+  const numbersArray: number[] = [1, 3, 2, 2, 4, 5, 7, 0];
   const target = 5;
 
-  const findPairs = (array, target) => {
-    const correctTotals = [];
+  const findPairs = (array: number[], target: number): string => {
+    const correctTotals: number[][] = [];
 
     for (let i = 0; i < array.length; i++) {
       for (let j = i + 1; j < array.length; j++) {
-        if (array[i] + array[j] === target) {
-          correctTotals.push([array[i], array[j]]);
+        const a: number | undefined = array[i];
+        const b: number | undefined = array[j];
+
+        if (a === undefined || b === undefined) continue;
+
+        if (a + b === target) {
+          correctTotals.push([a, b]);
         }
       }
     }
@@ -91,7 +96,7 @@ export default function Challenges(): JSX.Element {
         {firstNonRepeatingLetter(string3) || "No unique characters"}
       </div>
       <div>countTheVowels: {countTheVowels(string5)}</div>
+      <div>findPairs: {findPairs(numbersArray, target)}</div>
     </>
-    // ${findPairs(numbersArray, target)}`,
   );
 }
