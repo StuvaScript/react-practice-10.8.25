@@ -10,7 +10,7 @@ export default function PhoneBookForm({
   const [counter, setCounter] = useState(3);
 
   useEffect(() => {
-    if (editContact.id) {
+    if (editContact?.id) {
       setName(editContact.name);
       setPhone(editContact.phone);
     } else {
@@ -21,7 +21,7 @@ export default function PhoneBookForm({
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (editContact.id) {
+    if (editContact?.id) {
       editPhoneBook({ name, phone, id: editContact.id });
     } else {
       updatePhoneBook({ name, phone, id: counter });
@@ -55,7 +55,7 @@ export default function PhoneBookForm({
       </div>
       <div>
         <button type="submit">
-          {editContact.id ? "Edit person" : "Add person"}
+          {editContact?.id ? "Edit person" : "Add person"}
         </button>
       </div>
     </form>

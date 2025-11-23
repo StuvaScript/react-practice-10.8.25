@@ -1,16 +1,28 @@
 import { useMemo, useState } from "react";
 import PhoneBookForm from "./PhoneBookForm";
 import PhoneBookList from "./PhoneBookList";
+import type { JSX } from "react";
 
-export default function PhoneBook() {
-  const [phoneBook, setPhoneBook] = useState([
+type PhoneBook = {
+  name: string;
+  phone: string;
+  id: number;
+};
+
+type Sort = {
+  field: "name";
+  direction: "asc" | "desc";
+};
+
+export default function PhoneBook(): JSX.Element {
+  const [phoneBook, setPhoneBook] = useState<PhoneBook[]>([
     { name: "Zeke", phone: "1233454566", id: 1 },
     { name: "Brooke", phone: "3455789870", id: 2 },
   ]);
-  const [editContact, setEditContact] = useState({});
-  const [sort, setSort] = useState({ field: "name", direction: "asc" });
+  const [editContact, setEditContact] = useState<{} | PhoneBook>({});
+  const [sort, setSort] = useState<Sort>({ field: "name", direction: "asc" });
 
-  const updatePhoneBook = (value) => {
+  const updatePhoneBook = (value: PhoneBook): void => {
     setPhoneBook([...phoneBook, value]);
   };
 
