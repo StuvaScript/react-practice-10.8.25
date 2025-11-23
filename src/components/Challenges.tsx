@@ -18,20 +18,20 @@ export default function Challenges() {
   //     }
   //   };
 
-  const identifyUniqueChars = (string) => {
+  const identifyUniqueChars = (string: string): boolean => {
     return new Set(string).size === string.length;
   };
 
   const string3 = "aabccdeff";
   const string4 = "xxyzx";
 
-  const firstNonRepeatingLetter = (string) => {
-    const split = string.split("");
+  const firstNonRepeatingLetter = (string: string) => {
+    const split: string[] = string.split("");
 
     for (let i = 0; i < split.length; i++) {
-      const letter = split[i];
-      const newArray = split.toSpliced(i, 1);
-
+      const letter: string = string.charAt(i);
+      const newArray: string[] = split.toSpliced(i, 1);
+      // ``** This checks to see when we remove a letter if that same letter exists on the array still. If it doesn't, then this is the unique letter and we return it.
       if (!newArray.includes(letter)) return split[i];
     }
   };
@@ -77,9 +77,15 @@ export default function Challenges() {
     return JSON.stringify(correctTotals);
   };
 
-  return [
-    `${identifyUniqueChars(string2)}, ${firstNonRepeatingLetter(
-      string3
-    )}, ${countTheVowels(string5)}, ${findPairs(numbersArray, target)}`,
-  ];
+  return (
+    <>
+      <div>
+        identifyUniqueChars: {identifyUniqueChars(string2) ? "true" : "false"}
+      </div>
+      <div>${firstNonRepeatingLetter(string3)},</div>
+    </>
+    // ${firstNonRepeatingLetter(string3)},
+    // ${countTheVowels(string5)},
+    // ${findPairs(numbersArray, target)}`,
+  );
 }
