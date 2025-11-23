@@ -25,7 +25,7 @@ export default function Challenges() {
   const string3 = "aabccdeff";
   const string4 = "xxyzx";
 
-  const firstNonRepeatingLetter = (string: string) => {
+  const firstNonRepeatingLetter = (string: string): string | undefined => {
     const split: string[] = string.split("");
 
     for (let i = 0; i < split.length; i++) {
@@ -82,7 +82,10 @@ export default function Challenges() {
       <div>
         identifyUniqueChars: {identifyUniqueChars(string2) ? "true" : "false"}
       </div>
-      <div>${firstNonRepeatingLetter(string3)},</div>
+      <div>
+        firstNonRepeatingLetter:{" "}
+        {firstNonRepeatingLetter(string3) || "No unique characters"}
+      </div>
     </>
     // ${firstNonRepeatingLetter(string3)},
     // ${countTheVowels(string5)},
