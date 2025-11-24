@@ -9,7 +9,7 @@ export type PhoneBook = {
   id: number;
 };
 
-type Sort = {
+export type Sort = {
   field: "name" | "phone";
   direction: "asc" | "desc";
 };

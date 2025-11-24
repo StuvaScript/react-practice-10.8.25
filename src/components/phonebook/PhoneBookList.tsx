@@ -1,11 +1,19 @@
 import PBListItem from "./PBListItem";
+import type { PhoneBook, Sort } from "./PhoneBook";
+
+type PhoneBookListProps = {
+  phoneBook: PhoneBook[];
+  handleDelete: (id: number) => void;
+  handleEdit: (id: number) => void;
+  handleSort: (value: Sort["field"]) => void;
+};
 
 export default function PhoneBookList({
   phoneBook,
   handleDelete,
   handleEdit,
   handleSort,
-}) {
+}: PhoneBookListProps) {
   return (
     <div className="container" style={{ width: "30vw" }}>
       <div
