@@ -19,7 +19,7 @@ export default function PhoneBook(): JSX.Element {
     { name: "Zeke", phone: "1233454566", id: 1 },
     { name: "Brooke", phone: "3455789870", id: 2 },
   ]);
-  const [editContact, setEditContact] = useState<{} | PhoneBook>({});
+  const [editContact, setEditContact] = useState<null | PhoneBook>(null);
   const [sort, setSort] = useState<Sort>({ field: "name", direction: "asc" });
 
   const updatePhoneBook = (value: PhoneBook): void => {
@@ -45,7 +45,7 @@ export default function PhoneBook(): JSX.Element {
       ...phoneBook.filter((entry) => entry.id !== value.id),
       value,
     ]);
-    setEditContact({});
+    setEditContact(null);
   };
 
   const sortMethod = (a: PhoneBook, b: PhoneBook): number => {

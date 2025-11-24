@@ -4,7 +4,7 @@ import type { PhoneBook } from "./PhoneBook";
 
 type PhoneBookFormProps = {
   updatePhoneBook: (value: PhoneBook) => void;
-  editContact: {} | PhoneBook;
+  editContact: null | PhoneBook;
   editPhoneBook: (value: PhoneBook) => void;
 };
 
@@ -17,8 +17,8 @@ export default function PhoneBookForm({
   const [phone, setPhone] = useState<string>("");
   const [counter, setCounter] = useState<number>(3);
 
-  useEffect(() => {
-    if (editContact?.id) {
+  useEffect((): void => {
+    if (editContact) {
       setName(editContact.name);
       setPhone(editContact.phone);
     } else {
