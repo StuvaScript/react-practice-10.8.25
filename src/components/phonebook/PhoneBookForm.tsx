@@ -1,10 +1,18 @@
 import { useEffect, useState } from "react";
+import type { JSX } from "react";
+import type { PhoneBook } from "./PhoneBook";
+
+type PhoneBookFormProps = {
+  updatePhoneBook: (value: PhoneBook) => void;
+  editContact: {} | PhoneBook;
+  editPhoneBook: (value: PhoneBook) => void;
+};
 
 export default function PhoneBookForm({
   updatePhoneBook,
   editContact,
   editPhoneBook,
-}) {
+}: PhoneBookFormProps): JSX.Element {
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [counter, setCounter] = useState(3);

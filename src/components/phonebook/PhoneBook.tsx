@@ -3,7 +3,7 @@ import PhoneBookForm from "./PhoneBookForm";
 import PhoneBookList from "./PhoneBookList";
 import type { JSX } from "react";
 
-type PhoneBook = {
+export type PhoneBook = {
   name: string;
   phone: string;
   id: number;
