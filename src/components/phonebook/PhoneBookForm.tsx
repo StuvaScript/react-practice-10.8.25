@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import type { JSX } from "react";
+import type { FormEvent, JSX } from "react";
 import type { PhoneBook } from "./PhoneBook";
 
 type PhoneBookFormProps = {
@@ -27,7 +27,7 @@ export default function PhoneBookForm({
     }
   }, [editContact]);
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
+  const handleSubmit = (e: FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
     if (editContact) {
       editPhoneBook({ name, phone, id: editContact.id });

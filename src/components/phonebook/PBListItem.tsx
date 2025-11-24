@@ -1,5 +1,18 @@
-export default function PBListItem({ person, handleDelete, handleEdit }) {
-  const { name, phone, id } = person;
+import type { JSX } from "react";
+import type { PhoneBook } from "./PhoneBook";
+
+type PBListItemProps = {
+  person: PhoneBook;
+  handleDelete: (id: number) => void;
+  handleEdit: (id: number) => void;
+};
+
+export default function PBListItem({
+  person,
+  handleDelete,
+  handleEdit,
+}: PBListItemProps): JSX.Element {
+  const { name, phone, id }: PhoneBook = person;
 
   return (
     <>
