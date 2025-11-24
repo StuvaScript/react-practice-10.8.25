@@ -13,9 +13,9 @@ export default function PhoneBookForm({
   editContact,
   editPhoneBook,
 }: PhoneBookFormProps): JSX.Element {
-  const [name, setName] = useState("");
-  const [phone, setPhone] = useState("");
-  const [counter, setCounter] = useState(3);
+  const [name, setName] = useState<string>("");
+  const [phone, setPhone] = useState<string>("");
+  const [counter, setCounter] = useState<number>(3);
 
   useEffect(() => {
     if (editContact?.id) {
