@@ -2,11 +2,11 @@ import { useState } from "react";
 import type { JSX, FormEvent } from "react";
 import type { List } from "./ToDo";
 
-type UpdateListProps = {
+type FormProps = {
   updateList: (input: List) => void;
 };
 
-export default function Form({ updateList }: UpdateListProps): JSX.Element {
+export default function Form({ updateList }: FormProps): JSX.Element {
   const [input, setInput] = useState<string>("");
   const [counter, setCounter] = useState<number>(3);
 
