@@ -1,20 +1,23 @@
 import { useState } from "react";
 import Form from "./Form";
 import List from "./List";
+import type { JSX } from "react";
 
-export default function ToDo() {
-  const [list, setList] = useState([
+export type List = {
+  name: string;
+  id: number;
+};
+
+export default function ToDo(): JSX.Element {
+  const [list, setList] = useState<List[]>([
     { name: "Gibson", id: 1 },
     { name: "Ibanez", id: 2 },
   ]);
 
-  const updateList = (input) => {
-    setList([...list, input]);
-  };
+  const updateList = (input: List): void => setList([...list, input]);
 
-  const handleDelete = (id) => {
+  const handleDelete = (id: number): void =>
     setList([...list.filter((item) => item.id !== id)]);
-  };
 
   return (
     <>

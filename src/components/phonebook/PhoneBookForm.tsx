@@ -1,16 +1,24 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
+import type { FormEvent, JSX } from "react";
+import type { PhoneBook } from "./PhoneBook";
+
+type PhoneBookFormProps = {
+  updatePhoneBook: (value: PhoneBook) => void;
+  editContact: null | PhoneBook;
+  editPhoneBook: (value: PhoneBook) => void;
+};
 
 export default function PhoneBookForm({
   updatePhoneBook,
   editContact,
   editPhoneBook,
-}) {
-  const [name, setName] = useState("");
-  const [phone, setPhone] = useState("");
-  const [counter, setCounter] = useState(3);
+}: PhoneBookFormProps): JSX.Element {
+  const [name, setName] = useState<string>("");
+  const [phone, setPhone] = useState<string>("");
+  const [counter, setCounter] = useState<number>(3);
 
-  useEffect(() => {
-    if (editContact.id) {
+  useEffect((): void => {
+    if (editContact) {
       setName(editContact.name);
       setPhone(editContact.phone);
     } else {
@@ -19,9 +27,9 @@ export default function PhoneBookForm({
     }
   }, [editContact]);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
-    if (editContact.id) {
+    if (editContact) {
       editPhoneBook({ name, phone, id: editContact.id });
     } else {
       updatePhoneBook({ name, phone, id: counter });
@@ -55,7 +63,7 @@ export default function PhoneBookForm({
       </div>
       <div>
         <button type="submit">
-          {editContact.id ? "Edit person" : "Add person"}
+          {editContact ? "Edit person" : "Add person"}
         </button>
       </div>
     </form>

@@ -1,7 +1,17 @@
 import { useState } from "react";
+import type { JSX } from "react";
+import type { List } from "./ToDo";
 
-export default function ListItem({ item, handleDelete }) {
-  const [isComplete, setIsComplete] = useState(false);
+type ListItemProps = {
+  item: List;
+  handleDelete: (id: number) => void;
+};
+
+export default function ListItem({
+  item,
+  handleDelete,
+}: ListItemProps): JSX.Element {
+  const [isComplete, setIsComplete] = useState<boolean>(false);
 
   const { name, id } = item;
 

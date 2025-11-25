@@ -1,11 +1,20 @@
 import PBListItem from "./PBListItem";
+import type { PhoneBook, Sort } from "./PhoneBook";
+import type { JSX } from "react";
+
+type PhoneBookListProps = {
+  phoneBook: PhoneBook[];
+  handleDelete: (id: number) => void;
+  handleEdit: (id: number) => void;
+  handleSort: (value: Sort["field"]) => void;
+};
 
 export default function PhoneBookList({
   phoneBook,
   handleDelete,
   handleEdit,
   handleSort,
-}) {
+}: PhoneBookListProps): JSX.Element {
   return (
     <div className="container" style={{ width: "30vw" }}>
       <div

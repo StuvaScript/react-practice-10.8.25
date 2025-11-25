@@ -1,37 +1,55 @@
 import { useMemo, useState } from "react";
 import PhoneBookForm from "./PhoneBookForm";
 import PhoneBookList from "./PhoneBookList";
+import type { JSX } from "react";
 
-export default function PhoneBook() {
-  const [phoneBook, setPhoneBook] = useState([
+export type PhoneBook = {
+  name: string;
+  phone: string;
+  id: number;
+};
+
+export type Sort = {
+  field: "name" | "phone";
+  direction: "asc" | "desc";
+};
+
+export default function PhoneBook(): JSX.Element {
+  const [phoneBook, setPhoneBook] = useState<PhoneBook[]>([
     { name: "Zeke", phone: "1233454566", id: 1 },
     { name: "Brooke", phone: "3455789870", id: 2 },
   ]);
-  const [editContact, setEditContact] = useState({});
-  const [sort, setSort] = useState({ field: "name", direction: "asc" });
+  const [editContact, setEditContact] = useState<null | PhoneBook>(null);
+  const [sort, setSort] = useState<Sort>({ field: "name", direction: "asc" });
 
-  const updatePhoneBook = (value) => {
+  const updatePhoneBook = (value: PhoneBook): void => {
     setPhoneBook([...phoneBook, value]);
   };
 
-  const handleDelete = (id) => {
+  const handleDelete = (id: number): void => {
     setPhoneBook([...phoneBook.filter((entry) => entry.id !== id)]);
   };
 
-  const handleEdit = (id) => {
-    setEditContact(phoneBook.find((entry) => entry.id === id));
+  const handleEdit = (id: number): void => {
+    const editableContact: PhoneBook | undefined = phoneBook.find(
+      (entry) => entry.id === id
+    );
+    if (!editableContact)
+      throw new Error(`No contact exists with the ID of ${id}`);
+
+    setEditContact(editableContact);
   };
 
-  const editPhoneBook = (value) => {
+  const editPhoneBook = (value: PhoneBook): void => {
     setPhoneBook([
       ...phoneBook.filter((entry) => entry.id !== value.id),
       value,
     ]);
-    setEditContact({});
+    setEditContact(null);
   };
 
-  const sortMethod = (a, b) => {
-    const { field, direction } = sort;
+  const sortMethod = (a: PhoneBook, b: PhoneBook): number => {
+    const { field, direction }: Sort = sort;
 
     if (field === "name" && direction === "asc")
       return a.name.localeCompare(b.name);
@@ -46,12 +64,12 @@ export default function PhoneBook() {
     return 0;
   };
 
-  const sortedPhoneBook = useMemo(() => {
+  const sortedPhoneBook = useMemo((): PhoneBook[] => {
     return phoneBook.toSorted(sortMethod);
   }, [phoneBook, sort]);
 
-  const handleSort = (value) => {
-    setSort((prev) => {
+  const handleSort = (value: Sort["field"]): void => {
+    setSort((prev: Sort): Sort => {
       if (prev.field === value) {
         return {
           field: value,
