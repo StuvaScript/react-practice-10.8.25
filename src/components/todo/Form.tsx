@@ -1,10 +1,16 @@
 import { useState } from "react";
+import type { JSX, FormEvent } from "react";
+import type { List } from "./ToDo";
 
-export default function Form({ updateList }) {
-  const [input, setInput] = useState("");
-  const [counter, setCounter] = useState(3);
+type UpdateListProps = {
+  updateList: (input: List) => void;
+};
 
-  const handleSubmit = (e) => {
+export default function Form({ updateList }: UpdateListProps): JSX.Element {
+  const [input, setInput] = useState<string>("");
+  const [counter, setCounter] = useState<number>(3);
+
+  const handleSubmit = (e: FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
     updateList({ name: input, id: counter });
     setCounter((count) => count + 1);

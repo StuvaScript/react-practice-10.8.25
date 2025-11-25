@@ -3,7 +3,7 @@ import Form from "./Form";
 import List from "./List";
 import type { JSX } from "react";
 
-type List = {
+export type List = {
   name: string;
   id: number;
 };
